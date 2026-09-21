@@ -1,321 +1,863 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flores Amarillas para Ti 🌻</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para ti ❤️</title>
+
+<style>
+/* =========================================================
+   CONFIGURACIÓN VISUAL
+   ========================================================= */
+
+:root {
+    --fondo-1: #fff8df;
+    --fondo-2: #ffe9a8;
+    --amarillo: #ffd83d;
+    --amarillo-oscuro: #f4b400;
+    --verde: #4c8b3c;
+    --verde-claro: #7fbd5c;
+    --rosa: #ff7894;
+    --texto: #7d5b24;
+    --blanco: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    background:
+        radial-gradient(circle at 50% 45%, rgba(255,255,255,.95) 0%, rgba(255,244,194,.8) 28%, transparent 65%),
+        linear-gradient(135deg, var(--fondo-1), var(--fondo-2));
+    color: var(--texto);
+}
+
+
+/* =========================================================
+   FONDO
+   ========================================================= */
+
+.fondo {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.luz {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.38);
+    filter: blur(40px);
+    animation: moverLuz 8s ease-in-out infinite alternate;
+}
+
+.luz:nth-child(1) {
+    top: -100px;
+    left: -80px;
+}
+
+.luz:nth-child(2) {
+    right: -100px;
+    bottom: -100px;
+    animation-delay: 2s;
+}
+
+.luz:nth-child(3) {
+    left: 40%;
+    top: 25%;
+    width: 180px;
+    height: 180px;
+    animation-delay: 4s;
+}
+
+@keyframes moverLuz {
+    from {
+        transform: translate(0, 0) scale(1);
     }
 
-    body {
-      background-color: #05020a;
-      color: #ffffff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow: hidden;
-      height: 100vh;
-      width: 100vw;
+    to {
+        transform: translate(50px, 30px) scale(1.2);
+    }
+}
+
+
+/* =========================================================
+   TEXTO SUPERIOR
+   ========================================================= */
+
+.encabezado {
+    position: absolute;
+    top: 6%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 20;
+    width: 90%;
+}
+
+.encabezado h1 {
+    font-size: clamp(28px, 5vw, 55px);
+    color: #e6a900;
+    text-shadow:
+        0 2px 0 white,
+        0 5px 15px rgba(175, 123, 0, .25);
+    animation: aparecer 1.5s ease forwards;
+}
+
+.encabezado p {
+    margin-top: 8px;
+    font-size: clamp(14px, 2vw, 20px);
+    color: #9c7532;
+    opacity: .9;
+}
+
+
+/* =========================================================
+   ESCENA CENTRAL
+   ========================================================= */
+
+.escena {
+    position: absolute;
+    left: 50%;
+    top: 54%;
+    width: 400px;
+    height: 420px;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+
+/* =========================================================
+   TALLO
+   ========================================================= */
+
+.tallo {
+    position: absolute;
+    left: 50%;
+    top: 145px;
+    width: 10px;
+    height: 250px;
+    transform: translateX(-50%) rotate(3deg);
+    transform-origin: top;
+    border-radius: 20px;
+    background: linear-gradient(
+        to right,
+        #38742f,
+        #76b84e,
+        #3d7e32
+    );
+    box-shadow: 2px 4px 8px rgba(51, 105, 41, .25);
+}
+
+
+/* =========================================================
+   HOJAS
+   ========================================================= */
+
+.hoja {
+    position: absolute;
+    width: 105px;
+    height: 45px;
+    background: linear-gradient(135deg, #74b957, #3c8232);
+    border-radius: 100% 0 100% 0;
+    box-shadow: inset 4px 3px 8px rgba(255,255,255,.2);
+}
+
+.hoja::after {
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 2px;
+    background: rgba(255,255,255,.35);
+    top: 50%;
+    left: 10%;
+    transform: rotate(-12deg);
+}
+
+.hoja.izquierda {
+    left: 72px;
+    top: 250px;
+    transform: rotate(28deg);
+}
+
+.hoja.derecha {
+    right: 60px;
+    top: 305px;
+    transform: scaleX(-1) rotate(25deg);
+}
+
+
+/* =========================================================
+   FLOR PRINCIPAL
+   ========================================================= */
+
+.flor {
+    position: absolute;
+    left: 50%;
+    top: 65px;
+    width: 230px;
+    height: 230px;
+    transform: translateX(-50%);
+    animation: flotar 4s ease-in-out infinite;
+}
+
+.petalo {
+    position: absolute;
+    width: 105px;
+    height: 145px;
+    left: 62px;
+    top: 5px;
+    background: linear-gradient(
+        145deg,
+        #fff27b,
+        #ffd52e 60%,
+        #f4b900
+    );
+    border-radius: 70% 70% 55% 55%;
+    transform-origin: 50% 100%;
+    box-shadow:
+        inset 0 5px 10px rgba(255,255,255,.5),
+        0 4px 10px rgba(204, 151, 0, .15);
+}
+
+.petalo:nth-child(1) {
+    transform: rotate(0deg) translateY(-5px);
+}
+
+.petalo:nth-child(2) {
+    transform: rotate(45deg) translateY(-5px);
+}
+
+.petalo:nth-child(3) {
+    transform: rotate(90deg) translateY(-5px);
+}
+
+.petalo:nth-child(4) {
+    transform: rotate(135deg) translateY(-5px);
+}
+
+.petalo:nth-child(5) {
+    transform: rotate(180deg) translateY(-5px);
+}
+
+.petalo:nth-child(6) {
+    transform: rotate(225deg) translateY(-5px);
+}
+
+.petalo:nth-child(7) {
+    transform: rotate(270deg) translateY(-5px);
+}
+
+.petalo:nth-child(8) {
+    transform: rotate(315deg) translateY(-5px);
+}
+
+.centro-flor {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background:
+        radial-gradient(circle at 35% 30%, #fff09a, transparent 15%),
+        repeating-radial-gradient(
+            circle,
+            #9b641f 0 5px,
+            #c88423 5px 9px
+        );
+    border-radius: 50%;
+    left: 80px;
+    top: 80px;
+    z-index: 5;
+    border: 5px solid #e4a51d;
+    box-shadow: 0 5px 12px rgba(126, 81, 20, .25);
+}
+
+
+/* =========================================================
+   SEGUNDA FLOR
+   ========================================================= */
+
+.flor-pequena {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 40px;
+    top: 160px;
+    transform: scale(.55);
+    opacity: .9;
+    animation: flotar 5s ease-in-out infinite reverse;
+}
+
+.flor-pequena .petalo {
+    width: 90px;
+    height: 125px;
+    left: 5px;
+}
+
+.flor-pequena .centro-flor {
+    width: 60px;
+    height: 60px;
+    left: 20px;
+    top: 35px;
+}
+
+
+/* =========================================================
+   FRASES
+   ========================================================= */
+
+.frase {
+    position: absolute;
+    z-index: 15;
+    padding: 9px 17px;
+    border-radius: 30px;
+    background: rgba(255,255,255,.62);
+    border: 1px solid rgba(255,255,255,.85);
+    backdrop-filter: blur(7px);
+    box-shadow: 0 5px 18px rgba(179, 133, 30, .13);
+    color: #9b7023;
+    font-weight: bold;
+    white-space: nowrap;
+    animation: fraseFlota 4s ease-in-out infinite;
+}
+
+.frase:nth-child(1) {
+    left: -30px;
+    top: 40px;
+    animation-delay: .3s;
+}
+
+.frase:nth-child(2) {
+    right: -35px;
+    top: 100px;
+    animation-delay: 1s;
+}
+
+.frase:nth-child(3) {
+    left: -60px;
+    top: 180px;
+    animation-delay: 1.7s;
+}
+
+.frase:nth-child(4) {
+    right: -70px;
+    top: 225px;
+    animation-delay: 2.4s;
+}
+
+.frase:nth-child(5) {
+    left: 10px;
+    bottom: 30px;
+    animation-delay: 3s;
+}
+
+.frase:nth-child(6) {
+    right: 5px;
+    bottom: 55px;
+    animation-delay: 3.5s;
+}
+
+@keyframes fraseFlota {
+    0%, 100% {
+        transform: translateY(0) rotate(-1deg);
     }
 
-    /* Canvas para la galaxia de partículas */
-    #galaxyCanvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
+    50% {
+        transform: translateY(-10px) rotate(1deg);
+    }
+}
+
+
+/* =========================================================
+   CORAZONES
+   ========================================================= */
+
+.corazones {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 30;
+}
+
+.corazon {
+    position: absolute;
+    bottom: -50px;
+    font-size: 20px;
+    opacity: .7;
+    animation: subir linear forwards;
+}
+
+@keyframes subir {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(.7);
+        opacity: 0;
     }
 
-    /* Contenedor principal de elementos orbitando */
-    .galaxy-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      pointer-events: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    10% {
+        opacity: .8;
     }
 
-    /* Corazón central deslumbrante */
-    .central-heart {
-      position: absolute;
-      font-size: 4rem;
-      color: #ffd700;
-      text-shadow: 0 0 20px #ffd700, 0 0 40px #ffae00, 0 0 60px #ff8c00;
-      animation: pulse 2s infinite ease-in-out;
-      pointer-events: auto;
-      cursor: pointer;
+    80% {
+        opacity: .6;
     }
 
-    .central-heart span {
-      display: block;
-      font-size: 1rem;
-      text-align: center;
-      color: #fff;
-      font-weight: bold;
+    100% {
+        transform:
+            translateY(-110vh)
+            translateX(var(--movimiento))
+            rotate(360deg)
+            scale(1.3);
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   BRILLITOS
+   ========================================================= */
+
+.brillo {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 12px white, 0 0 20px #ffd83d;
+    animation: brillo 2s ease-in-out infinite;
+}
+
+.brillo:nth-child(1) {
+    top: 20%;
+    left: 18%;
+}
+
+.brillo:nth-child(2) {
+    top: 35%;
+    right: 18%;
+    animation-delay: .5s;
+}
+
+.brillo:nth-child(3) {
+    top: 70%;
+    left: 12%;
+    animation-delay: 1s;
+}
+
+.brillo:nth-child(4) {
+    top: 75%;
+    right: 14%;
+    animation-delay: 1.5s;
+}
+
+.brillo:nth-child(5) {
+    top: 15%;
+    right: 40%;
+    animation-delay: .8s;
+}
+
+@keyframes brillo {
+    0%, 100% {
+        transform: scale(.4);
+        opacity: .2;
     }
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px #ffd700); }
-      50% { transform: scale(1.15); filter: drop-shadow(0 0 30px #ffae00); }
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   BOTÓN
+   ========================================================= */
+
+.boton {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+
+    border: none;
+    padding: 13px 25px;
+    border-radius: 50px;
+
+    background: rgba(255,255,255,.7);
+    color: #9b7023;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 20px rgba(160, 110, 0, .15);
+
+    transition: .3s;
+}
+
+.boton:hover {
+    transform: translateX(-50%) scale(1.08);
+    background: white;
+}
+
+
+/* =========================================================
+   ANIMACIONES
+   ========================================================= */
+
+@keyframes flotar {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0) rotate(0deg);
     }
 
-    /* Etiquetas de texto y flores flotantes */
-    .floating-item {
-      position: absolute;
-      pointer-events: auto;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: transform 0.3s ease;
-      animation: float 4s infinite ease-in-out;
+    50% {
+        transform: translateX(-50%) translateY(-8px) rotate(1deg);
+    }
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
     }
 
-    .floating-item:hover {
-      transform: scale(1.2) !important;
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   MÓVIL
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .encabezado {
+        top: 4%;
     }
 
-    .flower-icon {
-      font-size: 2.5rem;
-      filter: drop-shadow(0 0 10px #ffd700);
+    .escena {
+        transform: translate(-50%, -50%) scale(.78);
     }
 
-    .tag-text {
-      background: rgba(255, 215, 0, 0.2);
-      border: 1px solid rgba(255, 215, 0, 0.6);
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      color: #fff;
-      font-weight: 600;
-      text-shadow: 0 0 5px #000;
-      box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-      white-space: nowrap;
+    .frase:nth-child(1) {
+        left: -15px;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
+    .frase:nth-child(2) {
+        right: -15px;
     }
 
-    /* Posicionamiento en órbita alrededor del centro */
-    .pos-1 { top: 25%; left: 20%; animation-delay: 0s; }
-    .pos-2 { top: 20%; right: 22%; animation-delay: 0.8s; }
-    .pos-3 { bottom: 25%; left: 18%; animation-delay: 1.5s; }
-    .pos-4 { bottom: 22%; right: 20%; animation-delay: 2.2s; }
-    .pos-5 { top: 12%; left: 45%; animation-delay: 0.4s; }
-    .pos-6 { bottom: 12%; left: 48%; animation-delay: 1.8s; }
-
-    /* Modal / Carta de amor */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(5px);
-      z-index: 10;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
+    .frase:nth-child(3) {
+        left: -20px;
     }
 
-    .modal-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
+    .frase:nth-child(4) {
+        right: -25px;
     }
 
-    .card {
-      background: linear-gradient(135deg, #fff2a1 0%, #ffd700 50%, #e6a100 100%);
-      color: #332200;
-      padding: 30px 25px;
-      border-radius: 20px;
-      max-width: 380px;
-      width: 85%;
-      text-align: center;
-      box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
-      transform: scale(0.8);
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    .frase:nth-child(5) {
+        left: 20px;
     }
 
-    .modal-overlay.active .card {
-      transform: scale(1);
+    .frase:nth-child(6) {
+        right: 20px;
     }
-
-    .card h2 {
-      font-size: 2rem;
-      font-family: 'Georgia', serif;
-      margin-bottom: 15px;
-      color: #4a3000;
-    }
-
-    .card p {
-      font-size: 1rem;
-      line-height: 1.5;
-      margin-bottom: 20px;
-      color: #3a2800;
-    }
-
-    .card .signature {
-      font-weight: bold;
-      font-size: 1.3rem;
-      margin-bottom: 20px;
-      color: #2b1d00;
-    }
-
-    .close-btn {
-      background: #4a3000;
-      color: #ffd700;
-      border: none;
-      padding: 10px 25px;
-      border-radius: 25px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: background 0.2s;
-    }
-
-    .close-btn:hover {
-      background: #2b1d00;
-    }
-  </style>
+}
+</style>
 </head>
+
 <body>
 
-  <canvas id="galaxyCanvas"></canvas>
 
-  <div class="galaxy-container">
-    <!-- Corazón central -->
-    <div class="central-heart" onclick="openCard()">
-      💛
-      <span>Te Amo</span>
+<!-- =========================================================
+     ❤️ EDITA LOS TEXTOS AQUÍ
+     
+     SOLO TIENES QUE CAMBIAR LO QUE ESTÁ ENTRE COMILLAS.
+     ========================================================= -->
+
+<script>
+
+const TEXTOS = {
+
+    titulo: "Para el amor de mi vida ❤️",
+
+    subtitulo: "Un pequeño detalle hecho especialmente para ti",
+
+    frases: [
+        "Eres mi persona favorita ❤️",
+        "Te amo muchísimo 💕",
+        "Gracias por existir 🌻",
+        "Siempre quiero estar contigo 🥰",
+        "Eres mi lugar favorito 💛",
+        "Mi amor por ti no tiene fin ✨"
+    ],
+
+    boton: "Hazme florecer 🌻",
+
+    mensajeFinal: "Te amo más de lo que las palabras pueden explicar ❤️"
+
+};
+
+</script>
+
+
+<!-- =========================================================
+     FONDO
+     ========================================================= -->
+
+<div class="fondo">
+
+    <div class="luz"></div>
+    <div class="luz"></div>
+    <div class="luz"></div>
+
+    <div class="brillo"></div>
+    <div class="brillo"></div>
+    <div class="brillo"></div>
+    <div class="brillo"></div>
+    <div class="brillo"></div>
+
+</div>
+
+
+<!-- =========================================================
+     ENCABEZADO
+     ========================================================= -->
+
+<header class="encabezado">
+
+    <h1 id="titulo"></h1>
+
+    <p id="subtitulo"></p>
+
+</header>
+
+
+<!-- =========================================================
+     ESCENA
+     ========================================================= -->
+
+<main class="escena">
+
+    <!-- Frases -->
+
+    <div class="frase" id="frase1"></div>
+    <div class="frase" id="frase2"></div>
+    <div class="frase" id="frase3"></div>
+    <div class="frase" id="frase4"></div>
+    <div class="frase" id="frase5"></div>
+    <div class="frase" id="frase6"></div>
+
+
+    <!-- Tallo -->
+
+    <div class="tallo"></div>
+
+
+    <!-- Hojas -->
+
+    <div class="hoja izquierda"></div>
+    <div class="hoja derecha"></div>
+
+
+    <!-- Flor principal -->
+
+    <div class="flor">
+
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+
+        <div class="centro-flor"></div>
+
     </div>
 
-    <!-- Elementos flotantes alrededor -->
-    <div class="floating-item pos-1" onclick="openCard()">
-      <div class="flower-icon">🌻</div>
-      <div class="tag-text">Eres mi sol ☀️</div>
+
+    <!-- Flor secundaria -->
+
+    <div class="flor-pequena">
+
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+
+        <div class="centro-flor"></div>
+
     </div>
 
-    <div class="floating-item pos-2" onclick="openCard()">
-      <div class="flower-icon">💐</div>
-      <div class="tag-text">Mi Amor</div>
-    </div>
+</main>
 
-    <div class="floating-item pos-3" onclick="openCard()">
-      <div class="flower-icon">🌻</div>
-      <div class="tag-text">Siempre juntos ♾️</div>
-    </div>
 
-    <div class="floating-item pos-4" onclick="openCard()">
-      <div class="flower-icon">🌻</div>
-      <div class="tag-text">Eres preciosa ✨</div>
-    </div>
+<!-- =========================================================
+     CORAZONES
+     ========================================================= -->
 
-    <div class="floating-item pos-5" onclick="openCard()">
-      <div class="flower-icon">💐</div>
-      <div class="tag-text">Me encantas ❤️</div>
-    </div>
+<div class="corazones" id="corazones"></div>
 
-    <div class="floating-item pos-6" onclick="openCard()">
-      <div class="flower-icon">🌻</div>
-      <div class="tag-text">Eres mi todo 🌟</div>
-    </div>
-  </div>
 
-  <!-- Modal estilo carta -->
-  <div class="modal-overlay" id="loveModal">
-    <div class="card">
-      <h2>Mi Amor 💛</h2>
-      <p>
-        Estas flores amarillas son como tú: brillantes, radiantes y llenas de alegría. 
-        Gracias por iluminar cada uno de mis días. Eres simplemente hermosa.
-      </p>
-      <div class="signature">Te Amo Mucho ✨</div>
-      <button class="close-btn" onclick="closeCard()">Para Ti 💛</button>
-    </div>
-  </div>
+<!-- =========================================================
+     BOTÓN
+     ========================================================= -->
 
-  <script>
-    // Configuración del Canvas para la galaxia en espiral
-    const canvas = document.getElementById('galaxyCanvas');
-    const ctx = canvas.getContext('2d');
+<button class="boton" id="boton"></button>
 
-    let width, height;
-    function resize() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
 
-    // Partículas de la galaxia
-    const particles = [];
-    const numParticles = 1200;
-    const galaxyRadius = Math.min(window.innerWidth, window.innerHeight) * 0.45;
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
 
-    for (let i = 0; i < numParticles; i++) {
-      const distance = Math.pow(Math.random(), 2) * galaxyRadius;
-      const angle = Math.random() * Math.PI * 2 + (distance * 0.005);
-      particles.push({
-        distance: distance,
-        angle: angle,
-        speed: (0.0005 + (galaxyRadius - distance) * 0.000005),
-        size: Math.random() * 2 + 0.5,
-        alpha: Math.random() * 0.8 + 0.2,
-        color: Math.random() > 0.3 ? '#ffd700' : '#ffffff'
-      });
-    }
+<script>
 
-    function animateGalaxy() {
-      ctx.fillStyle = 'rgba(5, 2, 10, 0.2)';
-      ctx.fillRect(0, 0, width, height);
+/* ---------------------------------------------------------
+   PONER LOS TEXTOS
+   --------------------------------------------------------- */
 
-      const centerX = width / 2;
-      const centerY = height / 2;
+document.getElementById("titulo").textContent = TEXTOS.titulo;
 
-      particles.forEach(p => {
-        p.angle += p.speed;
+document.getElementById("subtitulo").textContent = TEXTOS.subtitulo;
 
-        const x = centerX + Math.cos(p.angle) * p.distance;
-        const y = centerY + Math.sin(p.angle) * (p.distance * 0.5); // Perspectiva inclinada
+document.getElementById("boton").textContent = TEXTOS.boton;
 
-        ctx.beginPath();
-        ctx.arc(x, y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.globalAlpha = p.alpha;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = p.color;
-        ctx.fill();
-      });
+for (let i = 0; i < 6; i++) {
 
-      requestAnimationFrame(animateGalaxy);
-    }
+    document.getElementById("frase" + (i + 1)).textContent =
+        TEXTOS.frases[i];
 
-    animateGalaxy();
+}
 
-    // Lógica para abrir/cerrar la carta
-    function openCard() {
-      document.getElementById('loveModal').classList.add('active');
-    }
 
-    function closeCard() {
-      document.getElementById('loveModal').classList.remove('active');
-    }
-  </script>
+/* ---------------------------------------------------------
+   CORAZONES FLOTANTES
+   --------------------------------------------------------- */
+
+const contenedorCorazones =
+    document.getElementById("corazones");
+
+const simbolos = [
+    "❤️",
+    "💕",
+    "💛",
+    "💗",
+    "♡",
+    "♥"
+];
+
+function crearCorazon() {
+
+    const corazon =
+        document.createElement("div");
+
+    corazon.className = "corazon";
+
+    corazon.textContent =
+        simbolos[
+            Math.floor(
+                Math.random() * simbolos.length
+            )
+        ];
+
+    const posicion =
+        Math.random() * 100;
+
+    const tamano =
+        12 + Math.random() * 24;
+
+    const duracion =
+        5 + Math.random() * 6;
+
+    const movimiento =
+        (Math.random() * 160 - 80) + "px";
+
+    corazon.style.left =
+        posicion + "%";
+
+    corazon.style.fontSize =
+        tamano + "px";
+
+    corazon.style.animationDuration =
+        duracion + "s";
+
+    corazon.style.setProperty(
+        "--movimiento",
+        movimiento
+    );
+
+    contenedorCorazones.appendChild(corazon);
+
+    setTimeout(() => {
+
+        corazon.remove();
+
+    }, duracion * 1000);
+
+}
+
+
+/* Crear corazones continuamente */
+
+setInterval(
+    crearCorazon,
+    350
+);
+
+
+/* ---------------------------------------------------------
+   BOTÓN
+   --------------------------------------------------------- */
+
+const boton =
+    document.getElementById("boton");
+
+boton.addEventListener("click", () => {
+
+    alert(TEXTOS.mensajeFinal);
+
+});
+
+
+/* ---------------------------------------------------------
+   CREAR ALGUNOS CORAZONES AL INICIAR
+   --------------------------------------------------------- */
+
+for (let i = 0; i < 12; i++) {
+
+    setTimeout(
+        crearCorazon,
+        i * 250
+    );
+
+}
+
+</script>
+
 </body>
 </html>
