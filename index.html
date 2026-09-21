@@ -1,863 +1,403 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para ti ❤️</title>
-
-<style>
-/* =========================================================
-   CONFIGURACIÓN VISUAL
-   ========================================================= */
-
-:root {
-    --fondo-1: #fff8df;
-    --fondo-2: #ffe9a8;
-    --amarillo: #ffd83d;
-    --amarillo-oscuro: #f4b400;
-    --verde: #4c8b3c;
-    --verde-claro: #7fbd5c;
-    --rosa: #ff7894;
-    --texto: #7d5b24;
-    --blanco: #ffffff;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html,
-body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-body {
-    font-family: "Trebuchet MS", Arial, sans-serif;
-    background:
-        radial-gradient(circle at 50% 45%, rgba(255,255,255,.95) 0%, rgba(255,244,194,.8) 28%, transparent 65%),
-        linear-gradient(135deg, var(--fondo-1), var(--fondo-2));
-    color: var(--texto);
-}
-
-
-/* =========================================================
-   FONDO
-   ========================================================= */
-
-.fondo {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-.luz {
-    position: absolute;
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    background: rgba(255,255,255,.38);
-    filter: blur(40px);
-    animation: moverLuz 8s ease-in-out infinite alternate;
-}
-
-.luz:nth-child(1) {
-    top: -100px;
-    left: -80px;
-}
-
-.luz:nth-child(2) {
-    right: -100px;
-    bottom: -100px;
-    animation-delay: 2s;
-}
-
-.luz:nth-child(3) {
-    left: 40%;
-    top: 25%;
-    width: 180px;
-    height: 180px;
-    animation-delay: 4s;
-}
-
-@keyframes moverLuz {
-    from {
-        transform: translate(0, 0) scale(1);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Flores Amarillas para Stephanie 🌻</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    to {
-        transform: translate(50px, 30px) scale(1.2);
-    }
-}
-
-
-/* =========================================================
-   TEXTO SUPERIOR
-   ========================================================= */
-
-.encabezado {
-    position: absolute;
-    top: 6%;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    z-index: 20;
-    width: 90%;
-}
-
-.encabezado h1 {
-    font-size: clamp(28px, 5vw, 55px);
-    color: #e6a900;
-    text-shadow:
-        0 2px 0 white,
-        0 5px 15px rgba(175, 123, 0, .25);
-    animation: aparecer 1.5s ease forwards;
-}
-
-.encabezado p {
-    margin-top: 8px;
-    font-size: clamp(14px, 2vw, 20px);
-    color: #9c7532;
-    opacity: .9;
-}
-
-
-/* =========================================================
-   ESCENA CENTRAL
-   ========================================================= */
-
-.escena {
-    position: absolute;
-    left: 50%;
-    top: 54%;
-    width: 400px;
-    height: 420px;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-}
-
-
-/* =========================================================
-   TALLO
-   ========================================================= */
-
-.tallo {
-    position: absolute;
-    left: 50%;
-    top: 145px;
-    width: 10px;
-    height: 250px;
-    transform: translateX(-50%) rotate(3deg);
-    transform-origin: top;
-    border-radius: 20px;
-    background: linear-gradient(
-        to right,
-        #38742f,
-        #76b84e,
-        #3d7e32
-    );
-    box-shadow: 2px 4px 8px rgba(51, 105, 41, .25);
-}
-
-
-/* =========================================================
-   HOJAS
-   ========================================================= */
-
-.hoja {
-    position: absolute;
-    width: 105px;
-    height: 45px;
-    background: linear-gradient(135deg, #74b957, #3c8232);
-    border-radius: 100% 0 100% 0;
-    box-shadow: inset 4px 3px 8px rgba(255,255,255,.2);
-}
-
-.hoja::after {
-    content: "";
-    position: absolute;
-    width: 80%;
-    height: 2px;
-    background: rgba(255,255,255,.35);
-    top: 50%;
-    left: 10%;
-    transform: rotate(-12deg);
-}
-
-.hoja.izquierda {
-    left: 72px;
-    top: 250px;
-    transform: rotate(28deg);
-}
-
-.hoja.derecha {
-    right: 60px;
-    top: 305px;
-    transform: scaleX(-1) rotate(25deg);
-}
-
-
-/* =========================================================
-   FLOR PRINCIPAL
-   ========================================================= */
-
-.flor {
-    position: absolute;
-    left: 50%;
-    top: 65px;
-    width: 230px;
-    height: 230px;
-    transform: translateX(-50%);
-    animation: flotar 4s ease-in-out infinite;
-}
-
-.petalo {
-    position: absolute;
-    width: 105px;
-    height: 145px;
-    left: 62px;
-    top: 5px;
-    background: linear-gradient(
-        145deg,
-        #fff27b,
-        #ffd52e 60%,
-        #f4b900
-    );
-    border-radius: 70% 70% 55% 55%;
-    transform-origin: 50% 100%;
-    box-shadow:
-        inset 0 5px 10px rgba(255,255,255,.5),
-        0 4px 10px rgba(204, 151, 0, .15);
-}
-
-.petalo:nth-child(1) {
-    transform: rotate(0deg) translateY(-5px);
-}
-
-.petalo:nth-child(2) {
-    transform: rotate(45deg) translateY(-5px);
-}
-
-.petalo:nth-child(3) {
-    transform: rotate(90deg) translateY(-5px);
-}
-
-.petalo:nth-child(4) {
-    transform: rotate(135deg) translateY(-5px);
-}
-
-.petalo:nth-child(5) {
-    transform: rotate(180deg) translateY(-5px);
-}
-
-.petalo:nth-child(6) {
-    transform: rotate(225deg) translateY(-5px);
-}
-
-.petalo:nth-child(7) {
-    transform: rotate(270deg) translateY(-5px);
-}
-
-.petalo:nth-child(8) {
-    transform: rotate(315deg) translateY(-5px);
-}
-
-.centro-flor {
-    position: absolute;
-    width: 70px;
-    height: 70px;
-    background:
-        radial-gradient(circle at 35% 30%, #fff09a, transparent 15%),
-        repeating-radial-gradient(
-            circle,
-            #9b641f 0 5px,
-            #c88423 5px 9px
-        );
-    border-radius: 50%;
-    left: 80px;
-    top: 80px;
-    z-index: 5;
-    border: 5px solid #e4a51d;
-    box-shadow: 0 5px 12px rgba(126, 81, 20, .25);
-}
-
-
-/* =========================================================
-   SEGUNDA FLOR
-   ========================================================= */
-
-.flor-pequena {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    left: 40px;
-    top: 160px;
-    transform: scale(.55);
-    opacity: .9;
-    animation: flotar 5s ease-in-out infinite reverse;
-}
-
-.flor-pequena .petalo {
-    width: 90px;
-    height: 125px;
-    left: 5px;
-}
-
-.flor-pequena .centro-flor {
-    width: 60px;
-    height: 60px;
-    left: 20px;
-    top: 35px;
-}
-
-
-/* =========================================================
-   FRASES
-   ========================================================= */
-
-.frase {
-    position: absolute;
-    z-index: 15;
-    padding: 9px 17px;
-    border-radius: 30px;
-    background: rgba(255,255,255,.62);
-    border: 1px solid rgba(255,255,255,.85);
-    backdrop-filter: blur(7px);
-    box-shadow: 0 5px 18px rgba(179, 133, 30, .13);
-    color: #9b7023;
-    font-weight: bold;
-    white-space: nowrap;
-    animation: fraseFlota 4s ease-in-out infinite;
-}
-
-.frase:nth-child(1) {
-    left: -30px;
-    top: 40px;
-    animation-delay: .3s;
-}
-
-.frase:nth-child(2) {
-    right: -35px;
-    top: 100px;
-    animation-delay: 1s;
-}
-
-.frase:nth-child(3) {
-    left: -60px;
-    top: 180px;
-    animation-delay: 1.7s;
-}
-
-.frase:nth-child(4) {
-    right: -70px;
-    top: 225px;
-    animation-delay: 2.4s;
-}
-
-.frase:nth-child(5) {
-    left: 10px;
-    bottom: 30px;
-    animation-delay: 3s;
-}
-
-.frase:nth-child(6) {
-    right: 5px;
-    bottom: 55px;
-    animation-delay: 3.5s;
-}
-
-@keyframes fraseFlota {
-    0%, 100% {
-        transform: translateY(0) rotate(-1deg);
+    body {
+      background-color: #020108;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
     }
 
-    50% {
-        transform: translateY(-10px) rotate(1deg);
-    }
-}
-
-
-/* =========================================================
-   CORAZONES
-   ========================================================= */
-
-.corazones {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 30;
-}
-
-.corazon {
-    position: absolute;
-    bottom: -50px;
-    font-size: 20px;
-    opacity: .7;
-    animation: subir linear forwards;
-}
-
-@keyframes subir {
-    0% {
-        transform: translateY(0) rotate(0deg) scale(.7);
-        opacity: 0;
+    #webgl-container {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
     }
 
-    10% {
-        opacity: .8;
+    /* Indicador para rotar con el dedo */
+    .touch-hint {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      background: rgba(255, 215, 0, 0.15);
+      border: 1px solid rgba(255, 215, 0, 0.5);
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: #ffd700;
+      pointer-events: none;
+      backdrop-filter: blur(5px);
+      text-align: center;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
     }
 
-    80% {
-        opacity: .6;
+    /* Modal Carta 3D Glassmorphism */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
     }
 
-    100% {
-        transform:
-            translateY(-110vh)
-            translateX(var(--movimiento))
-            rotate(360deg)
-            scale(1.3);
-        opacity: 0;
-    }
-}
-
-
-/* =========================================================
-   BRILLITOS
-   ========================================================= */
-
-.brillo {
-    position: absolute;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: white;
-    box-shadow: 0 0 12px white, 0 0 20px #ffd83d;
-    animation: brillo 2s ease-in-out infinite;
-}
-
-.brillo:nth-child(1) {
-    top: 20%;
-    left: 18%;
-}
-
-.brillo:nth-child(2) {
-    top: 35%;
-    right: 18%;
-    animation-delay: .5s;
-}
-
-.brillo:nth-child(3) {
-    top: 70%;
-    left: 12%;
-    animation-delay: 1s;
-}
-
-.brillo:nth-child(4) {
-    top: 75%;
-    right: 14%;
-    animation-delay: 1.5s;
-}
-
-.brillo:nth-child(5) {
-    top: 15%;
-    right: 40%;
-    animation-delay: .8s;
-}
-
-@keyframes brillo {
-    0%, 100% {
-        transform: scale(.4);
-        opacity: .2;
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
     }
 
-    50% {
-        transform: scale(1.5);
-        opacity: 1;
-    }
-}
-
-
-/* =========================================================
-   BOTÓN
-   ========================================================= */
-
-.boton {
-    position: absolute;
-    bottom: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 50;
-
-    border: none;
-    padding: 13px 25px;
-    border-radius: 50px;
-
-    background: rgba(255,255,255,.7);
-    color: #9b7023;
-
-    font-size: 15px;
-    font-weight: bold;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 5px 20px rgba(160, 110, 0, .15);
-
-    transition: .3s;
-}
-
-.boton:hover {
-    transform: translateX(-50%) scale(1.08);
-    background: white;
-}
-
-
-/* =========================================================
-   ANIMACIONES
-   ========================================================= */
-
-@keyframes flotar {
-    0%, 100% {
-        transform: translateX(-50%) translateY(0) rotate(0deg);
+    .card {
+      background: rgba(15, 10, 25, 0.85);
+      border: 1px solid rgba(255, 215, 0, 0.6);
+      color: #ffffff;
+      padding: 35px 25px;
+      border-radius: 20px;
+      max-width: 380px;
+      width: 85%;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+      transform: scale(0.7) translateZ(-100px);
+      transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    50% {
-        transform: translateX(-50%) translateY(-8px) rotate(1deg);
-    }
-}
-
-@keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
+    .modal-overlay.active .card {
+      transform: scale(1) translateZ(0);
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-/* =========================================================
-   MÓVIL
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-    .encabezado {
-        top: 4%;
+    .card h2 {
+      font-size: 2rem;
+      font-family: 'Georgia', serif;
+      margin-bottom: 15px;
+      color: #ffd700;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
     }
 
-    .escena {
-        transform: translate(-50%, -50%) scale(.78);
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: #e0e0e0;
     }
 
-    .frase:nth-child(1) {
-        left: -15px;
+    .card .signature {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: #ffd700;
     }
 
-    .frase:nth-child(2) {
-        right: -15px;
+    .close-btn {
+      background: linear-gradient(135deg, #ffd700, #ff8c00);
+      color: #000;
+      border: none;
+      padding: 10px 28px;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+      transition: transform 0.2s;
     }
 
-    .frase:nth-child(3) {
-        left: -20px;
+    .close-btn:hover {
+      transform: scale(1.05);
     }
+  </style>
 
-    .frase:nth-child(4) {
-        right: -25px;
-    }
-
-    .frase:nth-child(5) {
-        left: 20px;
-    }
-
-    .frase:nth-child(6) {
-        right: 20px;
-    }
-}
-</style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
 </head>
-
 <body>
 
+  <div id="webgl-container"></div>
+  <div class="touch-hint">✨ Arrastra con el dedo para mover en 3D | Toca para viajar ✨</div>
 
-<!-- =========================================================
-     ❤️ EDITA LOS TEXTOS AQUÍ
-     
-     SOLO TIENES QUE CAMBIAR LO QUE ESTÁ ENTRE COMILLAS.
-     ========================================================= -->
-
-<script>
-
-const TEXTOS = {
-
-    titulo: "Para el amor de mi vida ❤️",
-
-    subtitulo: "Un pequeño detalle hecho especialmente para ti",
-
-    frases: [
-        "Eres mi persona favorita ❤️",
-        "Te amo muchísimo 💕",
-        "Gracias por existir 🌻",
-        "Siempre quiero estar contigo 🥰",
-        "Eres mi lugar favorito 💛",
-        "Mi amor por ti no tiene fin ✨"
-    ],
-
-    boton: "Hazme florecer 🌻",
-
-    mensajeFinal: "Te amo más de lo que las palabras pueden explicar ❤️"
-
-};
-
-</script>
-
-
-<!-- =========================================================
-     FONDO
-     ========================================================= -->
-
-<div class="fondo">
-
-    <div class="luz"></div>
-    <div class="luz"></div>
-    <div class="luz"></div>
-
-    <div class="brillo"></div>
-    <div class="brillo"></div>
-    <div class="brillo"></div>
-    <div class="brillo"></div>
-    <div class="brillo"></div>
-
-</div>
-
-
-<!-- =========================================================
-     ENCABEZADO
-     ========================================================= -->
-
-<header class="encabezado">
-
-    <h1 id="titulo"></h1>
-
-    <p id="subtitulo"></p>
-
-</header>
-
-
-<!-- =========================================================
-     ESCENA
-     ========================================================= -->
-
-<main class="escena">
-
-    <!-- Frases -->
-
-    <div class="frase" id="frase1"></div>
-    <div class="frase" id="frase2"></div>
-    <div class="frase" id="frase3"></div>
-    <div class="frase" id="frase4"></div>
-    <div class="frase" id="frase5"></div>
-    <div class="frase" id="frase6"></div>
-
-
-    <!-- Tallo -->
-
-    <div class="tallo"></div>
-
-
-    <!-- Hojas -->
-
-    <div class="hoja izquierda"></div>
-    <div class="hoja derecha"></div>
-
-
-    <!-- Flor principal -->
-
-    <div class="flor">
-
-        <div class="petalo"></div>
-        <div class="petalo"></div>
-        <div class="petalo"></div>
-        <div class="petalo"></div>
-        <div class="petalo"></div>
-        <div class="petalo"></div>
-        <div class="petalo"></div>
-        <div class="petalo"></div>
-
-        <div class="centro-flor"></div>
-
+  <div class="modal-overlay" id="loveModal">
+    <div class="card">
+      <h2>Para Stephanie 🌻</h2>
+      <p>
+        Steph, estas flores amarillas en esta galaxia 3D son tan radiantes e infinitas como tú. 
+        Gracias por iluminar cada día, mi cachona hermosa.
+      </p>
+      <div class="signature">Te Amo Mucho ✨</div>
+      <button class="close-btn" onclick="closeCard()">Cerrar 💛</button>
     </div>
+  </div>
 
+  <script>
+    // 1. Escena, Cámara y Renderizador 3D
+    const container = document.getElementById('webgl-container');
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x020108, 0.015);
 
-    <!-- Flor secundaria -->
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const initialCamPos = { x: 0, y: 15, z: 35 };
+    camera.position.set(initialCamPos.x, initialCamPos.y, initialCamPos.z);
 
-    <div class="flor-pequena">
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
 
-        <div class="petalo"></div>
-        <div class="petalo"></div>
-        <div class="petalo"></div>
-        <div class="petalo"></div>
-        <div class="petalo"></div>
-        <div class="petalo"></div>
-        <div class="petalo"></div>
-        <div class="petalo"></div>
+    // Controles para girar con el dedo / mouse
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.maxDistance = 60;
+    controls.minDistance = 5;
 
-        <div class="centro-flor"></div>
+    // Luces 3D
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    scene.add(ambientLight);
 
-    </div>
+    const pointLight = new THREE.PointLight(0xffd700, 3, 50);
+    pointLight.position.set(0, 0, 0);
+    scene.add(pointLight);
 
-</main>
+    // 2. Galaxia 3D de Partículas
+    const particleCount = 4000;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
 
+    const colorGold = new THREE.Color(0xffd700);
+    const colorWhite = new THREE.Color(0xffffff);
 
-<!-- =========================================================
-     CORAZONES
-     ========================================================= -->
+    for (let i = 0; i < particleCount; i++) {
+      const radius = Math.pow(Math.random(), 2) * 25;
+      const spinAngle = radius * 0.8;
+      const branchAngle = ((i % 3) * 2 * Math.PI) / 3;
 
-<div class="corazones" id="corazones"></div>
+      const randomX = (Math.random() - 0.5) * 1.5;
+      const randomY = (Math.random() - 0.5) * 1.5;
+      const randomZ = (Math.random() - 0.5) * 1.5;
 
+      const x = Math.cos(branchAngle + spinAngle) * radius + randomX;
+      const y = randomY;
+      const z = Math.sin(branchAngle + spinAngle) * radius + randomZ;
 
-<!-- =========================================================
-     BOTÓN
-     ========================================================= -->
+      positions[i * 3] = x;
+      positions[i * 3 + 1] = y;
+      positions[i * 3 + 2] = z;
 
-<button class="boton" id="boton"></button>
+      const mixedColor = Math.random() > 0.3 ? colorGold : colorWhite;
+      colors[i * 3] = mixedColor.r;
+      colors[i * 3 + 1] = mixedColor.g;
+      colors[i * 3 + 2] = mixedColor.b;
+    }
 
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-<!-- =========================================================
-     JAVASCRIPT
-     ========================================================= -->
+    const particleMaterial = new THREE.PointsMaterial({
+      size: 0.25,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.8,
+      blending: THREE.AdditiveBlending
+    });
 
-<script>
+    const galaxyPoints = new THREE.Points(geometry, particleMaterial);
+    scene.add(galaxyPoints);
 
-/* ---------------------------------------------------------
-   PONER LOS TEXTOS
-   --------------------------------------------------------- */
+    // 3. Corazón 3D Central
+    const heartShape = new THREE.Shape();
+    heartShape.moveTo(0, 0);
+    heartShape.bezierCurveTo(0, 0.5, -0.8, 1, -1.2, 0.4);
+    heartShape.bezierCurveTo(-1.5, -0.2, -0.6, -0.8, 0, -1.4);
+    heartShape.bezierCurveTo(0.6, -0.8, 1.5, -0.2, 1.2, 0.4);
+    heartShape.bezierCurveTo(0.8, 1, 0, 0.5, 0, 0);
 
-document.getElementById("titulo").textContent = TEXTOS.titulo;
+    const extrudeSettings = { depth: 0.4, bevelEnabled: true, bevelSegments: 3, steps: 1, bevelSize: 0.1, bevelThickness: 0.1 };
+    const heartGeo = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
+    const heartMat = new THREE.MeshPhongMaterial({ color: 0xffd700, emissive: 0xff8c00, shininess: 100 });
+    const heartMesh = new THREE.Mesh(heartGeo, heartMat);
+    heartMesh.scale.set(1.2, 1.2, 1.2);
+    heartMesh.rotation.z = Math.PI;
+    scene.add(heartMesh);
 
-document.getElementById("subtitulo").textContent = TEXTOS.subtitulo;
+    // 4. Objetos Orbitando con Nombres (Stephanie, Steph, Cachona, etc.)
+    const itemsGroup = new THREE.Group();
+    scene.add(itemsGroup);
 
-document.getElementById("boton").textContent = TEXTOS.boton;
+    const itemsData = [
+      { text: "Stephanie 💛", radius: 8, angle: 0 },
+      { text: "Steph ✨", radius: 12, angle: 1 },
+      { text: "Mi Cachona 👑", radius: 15, angle: 2 },
+      { text: "Eres mi sol ☀️", radius: 10, angle: 3 },
+      { text: "Te Amo 💕", radius: 18, angle: 4 },
+      { text: "Siempre Juntos ♾️", radius: 13, angle: 5 }
+    ];
 
-for (let i = 0; i < 6; i++) {
+    function createTextCanvas(text) {
+      const canvas = document.createElement('canvas');
+      canvas.width = 256;
+      canvas.height = 64;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = 'rgba(255, 215, 0, 0.2)';
+      ctx.strokeStyle = '#ffd700';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.roundRect(10, 10, 236, 44, 20);
+      ctx.fill();
+      ctx.stroke();
 
-    document.getElementById("frase" + (i + 1)).textContent =
-        TEXTOS.frases[i];
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'Bold 20px Segoe UI';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(text, 128, 32);
+      return canvas;
+    }
 
-}
+    const raycastTargets = [heartMesh];
 
+    itemsData.forEach(data => {
+      const group = new THREE.Group();
+      
+      // Flor 3D simplificada
+      const flowerGeo = new THREE.SphereGeometry(0.6, 16, 16);
+      const flowerMat = new THREE.MeshPhongMaterial({ color: 0xffd700, emissive: 0xffa500 });
+      const flowerMesh = new THREE.Mesh(flowerGeo, flowerMat);
+      group.add(flowerMesh);
 
-/* ---------------------------------------------------------
-   CORAZONES FLOTANTES
-   --------------------------------------------------------- */
+      // Sprite de texto estilo cartel 3D
+      const textCanvas = createTextCanvas(data.text);
+      const texture = new THREE.CanvasTexture(textCanvas);
+      const spriteMat = new THREE.SpriteMaterial({ map: texture, transparent: true });
+      const sprite = new THREE.Sprite(spriteMat);
+      sprite.scale.set(4, 1, 1);
+      sprite.position.y = 1.2;
+      group.add(sprite);
 
-const contenedorCorazones =
-    document.getElementById("corazones");
+      group.position.x = Math.cos(data.angle) * data.radius;
+      group.position.z = Math.sin(data.angle) * data.radius;
+      group.position.y = (Math.random() - 0.5) * 3;
 
-const simbolos = [
-    "❤️",
-    "💕",
-    "💛",
-    "💗",
-    "♡",
-    "♥"
-];
+      group.userData = { radius: data.radius, angle: data.angle, speed: 0.005 };
+      itemsGroup.add(group);
+      raycastTargets.push(flowerMesh);
+    });
 
-function crearCorazon() {
+    // 5. Interacción y Zoom "Viaje Espacial"
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
 
-    const corazon =
-        document.createElement("div");
+    function onTouchOrClick(event) {
+      const x = event.touches ? event.touches[0].clientX : event.clientX;
+      const y = event.touches ? event.touches[0].clientY : event.clientY;
 
-    corazon.className = "corazon";
+      mouse.x = (x / window.innerWidth) * 2 - 1;
+      mouse.y = -(y / window.innerHeight) * 2 + 1;
 
-    corazon.textContent =
-        simbolos[
-            Math.floor(
-                Math.random() * simbolos.length
-            )
-        ];
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(raycastTargets);
 
-    const posicion =
-        Math.random() * 100;
+      if (intersects.length > 0) {
+        travelToTarget(intersects[0].object);
+      }
+    }
 
-    const tamano =
-        12 + Math.random() * 24;
+    window.addEventListener('click', onTouchOrClick);
 
-    const duracion =
-        5 + Math.random() * 6;
+    function travelToTarget(target) {
+      const targetPos = new THREE.Vector3();
+      target.getWorldPosition(targetPos);
 
-    const movimiento =
-        (Math.random() * 160 - 80) + "px";
+      // Animación de viaje espacial hacia el elemento con TWEEN
+      new TWEEN.Tween(camera.position)
+        .to({ x: targetPos.x, y: targetPos.y + 1, z: targetPos.z + 5 }, 1200)
+        .easing(TWEEN.Easing.Cubic.Out)
+        .onUpdate(() => controls.update())
+        .onComplete(() => {
+          openCard();
+        })
+        .start();
 
-    corazon.style.left =
-        posicion + "%";
+      new TWEEN.Tween(controls.target)
+        .to({ x: targetPos.x, y: targetPos.y, z: targetPos.z }, 1200)
+        .easing(TWEEN.Easing.Cubic.Out)
+        .start();
+    }
 
-    corazon.style.fontSize =
-        tamano + "px";
+    function openCard() {
+      document.getElementById('loveModal').classList.add('active');
+    }
 
-    corazon.style.animationDuration =
-        duracion + "s";
+    function closeCard() {
+      document.getElementById('loveModal').classList.remove('active');
 
-    corazon.style.setProperty(
-        "--movimiento",
-        movimiento
-    );
+      // Regresar cámara a la vista general
+      new TWEEN.Tween(camera.position)
+        .to(initialCamPos, 1200)
+        .easing(TWEEN.Easing.Cubic.Out)
+        .start();
 
-    contenedorCorazones.appendChild(corazon);
+      new TWEEN.Tween(controls.target)
+        .to({ x: 0, y: 0, z: 0 }, 1200)
+        .easing(TWEEN.Easing.Cubic.Out)
+        .start();
+    }
 
-    setTimeout(() => {
+    // 6. Bucle de Animación 3D
+    function animate(time) {
+      requestAnimationFrame(animate);
+      TWEEN.update();
+      controls.update();
 
-        corazon.remove();
+      // Rotación suave de la galaxia
+      galaxyPoints.rotation.y += 0.0008;
 
-    }, duracion * 1000);
+      // Animación del corazón central
+      heartMesh.rotation.y += 0.01;
+      const scale = 1.2 + Math.sin(time * 0.003) * 0.1;
+      heartMesh.scale.set(scale, scale, scale);
 
-}
+      // Orbitación de las flores y nombres
+      itemsGroup.children.forEach(child => {
+        if (child.userData) {
+          child.userData.angle += child.userData.speed;
+          child.position.x = Math.cos(child.userData.angle) * child.userData.radius;
+          child.position.z = Math.sin(child.userData.angle) * child.userData.radius;
+        }
+      });
 
+      renderer.render(scene, camera);
+    }
 
-/* Crear corazones continuamente */
+    animate();
 
-setInterval(
-    crearCorazon,
-    350
-);
-
-
-/* ---------------------------------------------------------
-   BOTÓN
-   --------------------------------------------------------- */
-
-const boton =
-    document.getElementById("boton");
-
-boton.addEventListener("click", () => {
-
-    alert(TEXTOS.mensajeFinal);
-
-});
-
-
-/* ---------------------------------------------------------
-   CREAR ALGUNOS CORAZONES AL INICIAR
-   --------------------------------------------------------- */
-
-for (let i = 0; i < 12; i++) {
-
-    setTimeout(
-        crearCorazon,
-        i * 250
-    );
-
-}
-
-</script>
-
+    // Responsive
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
 </body>
 </html>
