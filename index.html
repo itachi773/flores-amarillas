@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flores Amarillas para Ti 🌻</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #05020a;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* Canvas para la galaxia de partículas */
+    #galaxyCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    /* Contenedor principal de elementos orbitando */
+    .galaxy-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Corazón central deslumbrante */
+    .central-heart {
+      position: absolute;
+      font-size: 4rem;
+      color: #ffd700;
+      text-shadow: 0 0 20px #ffd700, 0 0 40px #ffae00, 0 0 60px #ff8c00;
+      animation: pulse 2s infinite ease-in-out;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+
+    .central-heart span {
+      display: block;
+      font-size: 1rem;
+      text-align: center;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px #ffd700); }
+      50% { transform: scale(1.15); filter: drop-shadow(0 0 30px #ffae00); }
+    }
+
+    /* Etiquetas de texto y flores flotantes */
+    .floating-item {
+      position: absolute;
+      pointer-events: auto;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s ease;
+      animation: float 4s infinite ease-in-out;
+    }
+
+    .floating-item:hover {
+      transform: scale(1.2) !important;
+    }
+
+    .flower-icon {
+      font-size: 2.5rem;
+      filter: drop-shadow(0 0 10px #ffd700);
+    }
+
+    .tag-text {
+      background: rgba(255, 215, 0, 0.2);
+      border: 1px solid rgba(255, 215, 0, 0.6);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: #fff;
+      font-weight: 600;
+      text-shadow: 0 0 5px #000;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+      white-space: nowrap;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Posicionamiento en órbita alrededor del centro */
+    .pos-1 { top: 25%; left: 20%; animation-delay: 0s; }
+    .pos-2 { top: 20%; right: 22%; animation-delay: 0.8s; }
+    .pos-3 { bottom: 25%; left: 18%; animation-delay: 1.5s; }
+    .pos-4 { bottom: 22%; right: 20%; animation-delay: 2.2s; }
+    .pos-5 { top: 12%; left: 45%; animation-delay: 0.4s; }
+    .pos-6 { bottom: 12%; left: 48%; animation-delay: 1.8s; }
+
+    /* Modal / Carta de amor */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(5px);
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #fff2a1 0%, #ffd700 50%, #e6a100 100%);
+      color: #332200;
+      padding: 30px 25px;
+      border-radius: 20px;
+      max-width: 380px;
+      width: 85%;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+      transform: scale(0.8);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .modal-overlay.active .card {
+      transform: scale(1);
+    }
+
+    .card h2 {
+      font-size: 2rem;
+      font-family: 'Georgia', serif;
+      margin-bottom: 15px;
+      color: #4a3000;
+    }
+
+    .card p {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      color: #3a2800;
+    }
+
+    .card .signature {
+      font-weight: bold;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      color: #2b1d00;
+    }
+
+    .close-btn {
+      background: #4a3000;
+      color: #ffd700;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: background 0.2s;
+    }
+
+    .close-btn:hover {
+      background: #2b1d00;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="galaxyCanvas"></canvas>
+
+  <div class="galaxy-container">
+    <!-- Corazón central -->
+    <div class="central-heart" onclick="openCard()">
+      💛
+      <span>Te Amo</span>
+    </div>
+
+    <!-- Elementos flotantes alrededor -->
+    <div class="floating-item pos-1" onclick="openCard()">
+      <div class="flower-icon">🌻</div>
+      <div class="tag-text">Eres mi sol ☀️</div>
+    </div>
+
+    <div class="floating-item pos-2" onclick="openCard()">
+      <div class="flower-icon">💐</div>
+      <div class="tag-text">Mi Amor</div>
+    </div>
+
+    <div class="floating-item pos-3" onclick="openCard()">
+      <div class="flower-icon">🌻</div>
+      <div class="tag-text">Siempre juntos ♾️</div>
+    </div>
+
+    <div class="floating-item pos-4" onclick="openCard()">
+      <div class="flower-icon">🌻</div>
+      <div class="tag-text">Eres preciosa ✨</div>
+    </div>
+
+    <div class="floating-item pos-5" onclick="openCard()">
+      <div class="flower-icon">💐</div>
+      <div class="tag-text">Me encantas ❤️</div>
+    </div>
+
+    <div class="floating-item pos-6" onclick="openCard()">
+      <div class="flower-icon">🌻</div>
+      <div class="tag-text">Eres mi todo 🌟</div>
+    </div>
+  </div>
+
+  <!-- Modal estilo carta -->
+  <div class="modal-overlay" id="loveModal">
+    <div class="card">
+      <h2>Mi Amor 💛</h2>
+      <p>
+        Estas flores amarillas son como tú: brillantes, radiantes y llenas de alegría. 
+        Gracias por iluminar cada uno de mis días. Eres simplemente hermosa.
+      </p>
+      <div class="signature">Te Amo Mucho ✨</div>
+      <button class="close-btn" onclick="closeCard()">Para Ti 💛</button>
+    </div>
+  </div>
+
+  <script>
+    // Configuración del Canvas para la galaxia en espiral
+    const canvas = document.getElementById('galaxyCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Partículas de la galaxia
+    const particles = [];
+    const numParticles = 1200;
+    const galaxyRadius = Math.min(window.innerWidth, window.innerHeight) * 0.45;
+
+    for (let i = 0; i < numParticles; i++) {
+      const distance = Math.pow(Math.random(), 2) * galaxyRadius;
+      const angle = Math.random() * Math.PI * 2 + (distance * 0.005);
+      particles.push({
+        distance: distance,
+        angle: angle,
+        speed: (0.0005 + (galaxyRadius - distance) * 0.000005),
+        size: Math.random() * 2 + 0.5,
+        alpha: Math.random() * 0.8 + 0.2,
+        color: Math.random() > 0.3 ? '#ffd700' : '#ffffff'
+      });
+    }
+
+    function animateGalaxy() {
+      ctx.fillStyle = 'rgba(5, 2, 10, 0.2)';
+      ctx.fillRect(0, 0, width, height);
+
+      const centerX = width / 2;
+      const centerY = height / 2;
+
+      particles.forEach(p => {
+        p.angle += p.speed;
+
+        const x = centerX + Math.cos(p.angle) * p.distance;
+        const y = centerY + Math.sin(p.angle) * (p.distance * 0.5); // Perspectiva inclinada
+
+        ctx.beginPath();
+        ctx.arc(x, y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.alpha;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = p.color;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animateGalaxy);
+    }
+
+    animateGalaxy();
+
+    // Lógica para abrir/cerrar la carta
+    function openCard() {
+      document.getElementById('loveModal').classList.add('active');
+    }
+
+    function closeCard() {
+      document.getElementById('loveModal').classList.remove('active');
+    }
+  </script>
+</body>
+</html>
